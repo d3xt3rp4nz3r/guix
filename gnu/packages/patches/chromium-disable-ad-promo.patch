@@ -1,0 +1,16 @@
+Don't show promotions in app launcher.
+
+Copied from Debian:
+<https://anonscm.debian.org/cgit/pkg-chromium/pkg-chromium.git/tree/debian/patches/disable/promo.patch>
+
+--- a/chrome/browser/ui/app_list/app_list_service.cc
++++ b/chrome/browser/ui/app_list/app_list_service.cc
+@@ -145,7 +145,7 @@ void AppListService::RegisterPrefs(PrefR
+ 
+   // Identifies whether we should show the app launcher promo or not. This
+   // becomes false when the user dismisses the promo.
+-  registry->RegisterBooleanPref(prefs::kShowAppLauncherPromo, true);
++  registry->RegisterBooleanPref(prefs::kShowAppLauncherPromo, false);
+ }
+ 
+ // static
