@@ -4,6 +4,7 @@
 ;;; Copyright © 2016 Efraim Flashner <efraim@flashner.co.il>
 ;;; Copyright © 2017 Clément Lassieur <clement@lassieur.org>
 ;;; Copyright © 2017 Ricardo Wurmus <rekado@elephly.net>
+;;; Copyright © 2017 Marius Bakke <mbakke@fastmail.com>
 ;;;
 ;;; This file is part of GNU Guix.
 ;;;
@@ -79,6 +80,23 @@ C/C++ part.")
               (patches (append
                          (origin-patches (package-source icu4c))
                          (search-patches "icu4c-CVE-2017-14952.patch")))))))
+
+(define-public icu4c-59.1
+  (package
+    (inherit icu4c)
+    (version "59.1")
+    (source (origin
+              (method url-fetch)
+              (uri (string-append
+                    "http://download.icu-project.org/files/icu4c/"
+                    version
+                    "/icu4c-"
+                    (string-map (lambda (x) (if (char=? x #\.) #\_ x)) version)
+                    "-src.tgz"))
+              (patches (search-patches "icu4c-CVE-2017-14952.patch"))
+              (sha256
+               (base32
+                "1zkmbg2932ggvpgjp8pys0cj6z8bw087y8858009shkrjfpzscki"))))))
 
 (define-public java-icu4j
   (package
