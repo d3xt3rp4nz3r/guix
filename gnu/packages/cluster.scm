@@ -96,8 +96,9 @@
            (lambda* (#:key outputs #:allow-other-keys)
              (let ((out (assoc-ref outputs "out")))
                ;; Look for auxiliary executables below exec_prefix instead
-               ;; of assuming /lib/drbd (see TODO comment in the file).
-               (substitute* "user/v9/drbdtool_common.c"
+               ;; of assuming /lib/drbd (see TODO comment in the v9 file).
+               (substitute* '("user/v9/drbdtool_common.c"
+                              "user/v84/drbdadm_usage_cnt.c")
                  (("\"/lib/drbd\"")
                   (string-append "\"" out "/lib/drbd\"")))
                #t)))
